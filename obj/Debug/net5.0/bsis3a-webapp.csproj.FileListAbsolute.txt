@@ -73,3 +73,6 @@ C:\Users\Glen\bsis3a-webapp\obj\Debug\net5.0\Razor\Views\Item\Create.cshtml.g.cs
 C:\Users\Glen\bsis3a-webapp\obj\Debug\net5.0\Razor\Views\Item\Edit.cshtml.g.cs
 C:\Users\Glen\bsis3a-webapp\obj\Debug\net5.0\Razor\Views\Item\Delete.cshtml.g.cs
 C:\Users\Glen\bsis3a-webapp\obj\Debug\net5.0\Razor\Views\Type\Index.cshtml.g.cs
+C:\Users\Glen\bsis3a-webapp\obj\Debug\net5.0\Razor\Views\Type\Create.cshtml.g.cs
+C:\Users\Glen\bsis3a-webapp\obj\Debug\net5.0\Razor\Views\Type\Edit.cshtml.g.cs
+C:\Users\Glen\bsis3a-webapp\obj\Debug\net5.0\Razor\Views\Type\Delete.cshtml.g.cs

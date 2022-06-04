@@ -12,6 +12,7 @@ namespace bsis3a_webapp.Data
        }
 
        public DbSet<Item> Items { get; set; }
+       
        public DbSet<Type> Types { get; set; }
     }
 }
