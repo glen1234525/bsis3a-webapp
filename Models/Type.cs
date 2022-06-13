@@ -16,6 +16,7 @@ namespace bsis3a_webapp.Models
         [DisplayName("Type Name")]
         public string Name { get; set; }
         public Item Item { get; set; }
+         [RegularExpression("^*[1-9]*", ErrorMessage = "Please select type.")]
         public int ItemId { get; set; }
     }
 }

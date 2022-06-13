@@ -1,0 +1,51 @@
+@model IEnumerable<bsis3a_webapp.Models.Instrument>
+
+    <div class="mt-4">
+        <div class="row">
+            <div class="col-6">
+               <h2> Instruments</h2>
+           </div>
+         <div class="col-6 text-right">
+           <a asp-action="Create" class="btn btn-primary">
+          <i class="fa-solid fa-plus"></i> Add New Instrument
+           </a>
+         </div>
+         </div>  
+         <br>
+         @if(Model.Count() > 0)
+         {
+             <table class="table table-hover">
+                 <thead>
+                     <tr>
+                         <th>Image</th>
+                         <th>Item Name</th>
+                         <th>Type Name</th>
+                         <th>Price</th>
+                         <th></th>
+                     </tr>
+                 </thead>
+                 <tbody>
+                     @foreach (var item in Model)
+                     {
+                         <tr>
+                             <td><img src="@item.ImagePath" alt="" width="50"></td>
+                             <td width="25%">@item.Item.Name</td>
+                             <td width="25%">@item.Type.Name</td>
+                             <td width="25%">@item.Price</td>
+                             <td>
+                                 <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
+                                 <form method="post">
+                                    <button onclick="if(!confirm ('Are you sure you want to delete this record')){return false}" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+                                 </form>
+                             </td>
+                         </tr>
+                     }
+                 </tbody>
+
+             </table>
+         }    
+         else
+         {
+             <p>No item exist.</p>
+         }  
+     </div> 
