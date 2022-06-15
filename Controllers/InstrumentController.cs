@@ -54,6 +54,9 @@ namespace bsis3a_webapp.Controllers
             if(ModelState.IsValid)
            {
                 _db.Instruments.Add(InstrumentVM.Instrument);
+
+                SaveImage();
+
                 _db.SaveChanges();
 
                 var InstrumentId = InstrumentVM.Instrument.Id;
@@ -77,7 +80,9 @@ namespace bsis3a_webapp.Controllers
                    }
 
                    saveInstrument.ImagePath = RelativeImagePath;
-                   _db.SaveChanges();
+                    SaveImage();
+                     _db.SaveChanges();
+
                 }
 
 
@@ -85,11 +90,38 @@ namespace bsis3a_webapp.Controllers
            }
               return View(InstrumentVM);  
        }
+
+       public void SaveImage()
+       {
+             var InstrumentId = InstrumentVM.Instrument.Id;
+
+                string wwwrootPath = _hostingEnvironment.WebRootPath;
+
+                var files = HttpContext.Request.Form.Files;
+
+                var saveInstrument = _db.Instruments.Find(InstrumentId);
+
+                if(files.Count != 0)
+                {
+                   var ImagePath = @"images\instrument\";
+                   var Entension = Path.GetExtension(files[0].FileName);
+                   var RelativeImagePath = ImagePath + InstrumentId + Entension;
+                   var AbsImagePath = Path.Combine(wwwrootPath,RelativeImagePath);
+
+                   using (var fileStream = new FileStream( AbsImagePath,FileMode.Create))
+                   {
+                     files[0].CopyTo(fileStream);
+                   }
+
+                   saveInstrument.ImagePath = RelativeImagePath;
+                  
+       }
+  }
   
        [HttpGet]
         public IActionResult Edit(int id)
         {
-            InstrumentVM.Instrument = _db.Instruments.Include(m => m.Item).SingleOrDefault(m => m.Id == id);
+            InstrumentVM.Instrument = _db.Instruments.Include(m => m.Item).Include(m => m.Type).SingleOrDefault(m => m.Id == id);
             if(InstrumentVM.Instrument== null)
             {
                 return NotFound();
@@ -105,7 +137,11 @@ namespace bsis3a_webapp.Controllers
             if(ModelState.IsValid)
             {
                 _db.Instruments.Update(InstrumentVM.Instrument);
-                _db.SaveChanges();
+
+                SaveImage();
+
+                 _db.SaveChanges();
+
                return RedirectToAction("Index");
             }
             return View(InstrumentVM);

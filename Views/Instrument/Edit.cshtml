@@ -7,8 +7,9 @@
         </div>
 
     </div>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <input asp-for="Instrument.Id" hidden>
+        <input asp-for="Instrument.ImagePath" hidden>
     <div class="form-group">
         <label asp-for="Items"></label>
         <select asp-for="Instrument.ItemId" asp-items="Model.selectListItem(Model.Items)" class="form-control"></select>
